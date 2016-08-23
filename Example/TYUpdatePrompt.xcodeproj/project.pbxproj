@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		19A4CA7E1D6CCB9F00EA1E19 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19A4CA7D1D6CCB9F00EA1E19 /* LaunchScreen.storyboard */; };
 		58853A779D2822F30A1AA958 /* libPods-TYUpdatePrompt_Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 060215A668D502A737D8A478 /* libPods-TYUpdatePrompt_Tests.a */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
@@ -21,7 +22,6 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
-		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		D47A8AEA1B637EBB6FCA2CA5 /* libPods-TYUpdatePrompt_Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA492038D35ED5800F3946E9 /* libPods-TYUpdatePrompt_Example.a */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		060215A668D502A737D8A478 /* libPods-TYUpdatePrompt_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TYUpdatePrompt_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		19A4CA7D1D6CCB9F00EA1E19 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1BDB838243720AB57BFAB595 /* Pods-TYUpdatePrompt_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TYUpdatePrompt_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TYUpdatePrompt_Tests/Pods-TYUpdatePrompt_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		25514B1F1D638DB407AA1CE4 /* TYUpdatePrompt.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = TYUpdatePrompt.podspec; path = ../TYUpdatePrompt.podspec; sourceTree = "<group>"; };
 		3CB082ECCDB8D6C073DE66D6 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -61,7 +62,6 @@
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		7689B0EB6154024C19FC9C85 /* Pods-TYUpdatePrompt_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TYUpdatePrompt_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TYUpdatePrompt_Tests/Pods-TYUpdatePrompt_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D79EFFDFD24A00FC80C93867 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		E1D77454CA7A7EA5C5C75290 /* Pods-TYUpdatePrompt_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TYUpdatePrompt_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-TYUpdatePrompt_Example/Pods-TYUpdatePrompt_Example.release.xcconfig"; sourceTree = "<group>"; };
 		EA492038D35ED5800F3946E9 /* libPods-TYUpdatePrompt_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TYUpdatePrompt_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,9 +132,9 @@
 			children = (
 				6003F59C195388D20070C39A /* TYAppDelegate.h */,
 				6003F59D195388D20070C39A /* TYAppDelegate.m */,
-				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* TYViewController.h */,
 				6003F5A6195388D20070C39A /* TYViewController.m */,
+				19A4CA7D1D6CCB9F00EA1E19 /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
@@ -276,7 +276,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
+				19A4CA7E1D6CCB9F00EA1E19 /* LaunchScreen.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 			);
