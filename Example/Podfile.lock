@@ -1,9 +1,23 @@
 PODS:
   - Kiwi (2.4.0)
+  - OHHTTPStubs (5.2.0):
+    - OHHTTPStubs/Default (= 5.2.0)
+  - OHHTTPStubs/Core (5.2.0)
+  - OHHTTPStubs/Default (5.2.0):
+    - OHHTTPStubs/Core
+    - OHHTTPStubs/JSON
+    - OHHTTPStubs/NSURLSession
+    - OHHTTPStubs/OHPathHelpers
+  - OHHTTPStubs/JSON (5.2.0):
+    - OHHTTPStubs/Core
+  - OHHTTPStubs/NSURLSession (5.2.0):
+    - OHHTTPStubs/Core
+  - OHHTTPStubs/OHPathHelpers (5.2.0)
   - TYUpdatePrompt (0.1.0)
 
 DEPENDENCIES:
   - Kiwi
+  - OHHTTPStubs
   - TYUpdatePrompt (from `../`)
 
 EXTERNAL SOURCES:
@@ -12,8 +26,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Kiwi: f49c9d54b28917df5928fe44968a39ed198cb8a8
+  OHHTTPStubs: 29ae105797c3410112d10b217c8b7a55aab616b2
   TYUpdatePrompt: a23f5413857b536ff4e7fe9633b32d606385e4d1
 
-PODFILE CHECKSUM: 27b6695b1166b9909f4390f9f58bee54dd306d2b
+PODFILE CHECKSUM: 99a434b496920491bfc1ba093bbdb7a9d8f30ae1
 
 COCOAPODS: 1.0.1
