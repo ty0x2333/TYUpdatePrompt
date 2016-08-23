@@ -1,6 +1,6 @@
 //
 //  NSURL+TYUpdatePrompt.h
-//  Pods
+//  TYUpdatePrompt
 //
 //  Created by luckytianyiyan on 16/8/24.
 //
