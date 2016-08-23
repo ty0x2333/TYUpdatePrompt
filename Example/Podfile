@@ -1,0 +1,11 @@
+platform :ios,'7.0'
+
+target 'TYUpdatePrompt_Example' do
+  pod 'TYUpdatePrompt', :path => '../'
+
+  target 'TYUpdatePrompt_Tests' do
+    inherit! :search_paths
+
+    pod 'Kiwi'
+  end
+end

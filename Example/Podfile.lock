@@ -1,0 +1,19 @@
+PODS:
+  - Kiwi (2.4.0)
+  - TYUpdatePrompt (0.1.0)
+
+DEPENDENCIES:
+  - Kiwi
+  - TYUpdatePrompt (from `../`)
+
+EXTERNAL SOURCES:
+  TYUpdatePrompt:
+    :path: ../
+
+SPEC CHECKSUMS:
+  Kiwi: f49c9d54b28917df5928fe44968a39ed198cb8a8
+  TYUpdatePrompt: a23f5413857b536ff4e7fe9633b32d606385e4d1
+
+PODFILE CHECKSUM: 27b6695b1166b9909f4390f9f58bee54dd306d2b
+
+COCOAPODS: 1.0.1
