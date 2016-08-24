@@ -134,6 +134,10 @@
     [self checkVersionWithCycle:1];
 }
 
+- (void)checkVersionWeekly
+{
+    [self checkVersionWithCycle:7];
+}
 
 - (void)checkVersionWithCycle:(NSUInteger)day
 {

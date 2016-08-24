@@ -32,4 +32,6 @@
 
 - (void)checkVersionDaily;
 
+- (void)checkVersionWeekly;
+
 @end
