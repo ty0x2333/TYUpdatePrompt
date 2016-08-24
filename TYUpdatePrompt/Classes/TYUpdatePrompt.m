@@ -107,7 +107,7 @@
         
         [self log:@"need update"];
         if (_checkVersionCallback) {
-            _checkVersionCallback(self.appName, _appStoreInfo.version);
+            _checkVersionCallback(self.appName, _appStoreInfo);
         }
     });
 }

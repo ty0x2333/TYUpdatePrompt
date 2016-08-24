@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TYUPAppStoreInfo.h"
 
 @interface TYUpdatePrompt : NSObject
 
@@ -19,7 +20,7 @@
 
 @property (nonatomic, assign, getter = isDebugEnabled) BOOL debugEnabled;
 
-@property (nonatomic, copy, nullable) void (^checkVersionCallback)(NSString *appName, NSString *appStoreVersion);
+@property (nonatomic, copy, nullable) void (^checkVersionCallback)(NSString *appName, TYUPAppStoreInfo *appStoreInfo);
 
 @property (nonatomic, copy) NSString *appName;
 

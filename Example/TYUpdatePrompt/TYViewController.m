@@ -51,9 +51,9 @@
     }];
     
     __weak typeof(self) weakSelf = self;
-    [TYUpdatePrompt sharedInstance].checkVersionCallback = ^(NSString *appName, NSString *appStoreVersion) {
+    [TYUpdatePrompt sharedInstance].checkVersionCallback = ^(NSString *appName, TYUPAppStoreInfo *appStoreInfo) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Update Available" message:[NSString stringWithFormat:@"A new version of %@ is available. Please update to version %@ now.", appName, appStoreVersion] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Update", @"Next time", @"Skip this version", nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Update Available" message:[NSString stringWithFormat:@"A new version of %@ is available. Please update to version %@ now.\n\nRelease Notes\n\n%@", appName, appStoreInfo.version, appStoreInfo.releaseNotes] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Update", @"Next time", @"Skip this version", nil];
         alertView.delegate = strongSelf;
         [alertView show];
     };
