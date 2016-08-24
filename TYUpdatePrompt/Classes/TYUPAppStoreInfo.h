@@ -16,4 +16,6 @@
 @property (nonatomic, copy) NSString *version;
 @property (nonatomic, copy) NSString *releaseNotes;
 
+- (BOOL)isAppStoreVersionNewer:(NSString *)targetVersion;
+
 @end

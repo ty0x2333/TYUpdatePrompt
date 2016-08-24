@@ -96,7 +96,7 @@
             return;
         }
         
-        if (![self isAppStoreVersionNewer]) {
+        if (![_appStoreInfo isAppStoreVersionNewer:_currentVersion]) {
             [self log:@"Currently installed version is newer."];
             return;
         }
@@ -140,16 +140,6 @@
     }
     NSString *systemVersion = [UIDevice currentDevice].systemVersion;
     return [systemVersion compare:requiresOSVersion options:NSNumericSearch] == NSOrderedDescending || [systemVersion compare:requiresOSVersion options:NSNumericSearch] == NSOrderedSame;
-}
-
-#pragma mark - Comparator
-
-- (BOOL)isAppStoreVersionNewer
-{
-    if (!self.currentVersion || !_appStoreInfo.version) {
-        return NO;
-    }
-    return [self.currentVersion compare:_appStoreInfo.version options:NSNumericSearch] == NSOrderedAscending;
 }
 
 #pragma mark - Setter / Getter

@@ -22,4 +22,12 @@
     return self;
 }
 
+- (BOOL)isAppStoreVersionNewer:(NSString *)targetVersion
+{
+    if (targetVersion.length < 1 || _version.length < 1) {
+        return NO;
+    }
+    return [targetVersion compare:_version options:NSNumericSearch] == NSOrderedAscending;
+}
+
 @end
