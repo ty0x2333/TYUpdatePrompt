@@ -9,14 +9,14 @@
 #import "TYUpdatePrompt.h"
 #import "NSUserDefaults+TYUpdatePrompt.h"
 #import "NSURL+TYUpdatePrompt.h"
+#import "TYUpAppStoreInfo.h"
 
 @interface TYUpdatePrompt()
 
 @property (nonatomic, strong) NSDate *lastVersionCheckPerformedDate;
 @property (nonatomic, copy) NSString *currentVersion;
-@property (nonatomic, copy) NSString *appID;
 
-@property (nonatomic, copy, readonly) NSString *appStoreVersion;
+@property (nonatomic, strong) TYUPAppStoreInfo *appStoreInfo;
 
 @end
 
@@ -75,6 +75,13 @@
 {
     NSParameterAssert(appData);
     
+    NSArray *results = [appData objectForKey:@"results"];
+    if (results.count < 1) {
+        return;
+    }
+    
+    _appStoreInfo = [[TYUPAppStoreInfo alloc] initWithDictionary:[results firstObject]];
+    
     if (![self isUpdateCompatibleWithDeviceOS:appData]) {
         [self log:@"Device is not incompatible with installed verison of iOS"];
         return;
@@ -85,38 +92,33 @@
         _lastVersionCheckPerformedDate = [NSDate date];
         [[NSUserDefaults standardUserDefaults] tyup_storeLastVersionCheckPerformedDate:_lastVersionCheckPerformedDate];
         
-        NSArray *versionsInAppStore = [[appData valueForKey:@"results"] valueForKey:@"version"];
-        
-        if (versionsInAppStore.count < 1) {
+        if (_appStoreInfo.version.length < 0) {
             return;
         }
         
-        _appStoreVersion = [versionsInAppStore firstObject];
         if (![self isAppStoreVersionNewer]) {
             [self log:@"Currently installed version is newer."];
             return;
         }
         
-        _appID = appData[@"results"][0][@"trackId"];
-        
-        if (!_appID) {
+        if (!_appStoreInfo.appID.length < 0) {
             [self log:@"error: appID is nil"];
         }
         
         [self log:@"need update"];
         if (_checkVersionCallback) {
-            _checkVersionCallback(self.appName, _appStoreVersion);
+            _checkVersionCallback(self.appName, _appStoreInfo.version);
         }
     });
 }
 
 - (void)launchAppStore
 {
-    if (!_appID) {
+    if (!_appStoreInfo.appID) {
         [self log:@"error: appID is nil"];
         return;
     }
-    NSString *iTunesString = [NSString stringWithFormat:@"https://itunes.apple.com/app/id%@", _appID];
+    NSString *iTunesString = [NSString stringWithFormat:@"https://itunes.apple.com/app/id%@", _appStoreInfo.appID];
     [self log:[NSString stringWithFormat:@"launch AppStore: %@", iTunesString]];
     NSURL *iTunesURL = [NSURL URLWithString:iTunesString];
     
@@ -144,10 +146,10 @@
 
 - (BOOL)isAppStoreVersionNewer
 {
-    if (!self.currentVersion || !self.appStoreVersion) {
+    if (!self.currentVersion || !_appStoreInfo.version) {
         return NO;
     }
-    return [self.currentVersion compare:self.appStoreVersion options:NSNumericSearch] == NSOrderedAscending;
+    return [self.currentVersion compare:_appStoreInfo.version options:NSNumericSearch] == NSOrderedAscending;
 }
 
 #pragma mark - Setter / Getter
