@@ -21,6 +21,8 @@
 
 @property (nonatomic, copy, nullable) void (^checkVersionCallback)(BOOL isNeedUpdate);
 
+@property (nonatomic, copy) NSString *appName;
+
 - (void)checkVersion;
 
 @end

@@ -147,6 +147,16 @@
     return [self.currentVersion compare:self.appStoreVersion options:NSNumericSearch] == NSOrderedAscending;
 }
 
+#pragma mark - Setter / Getter
+
+- (NSString *)appName
+{
+    if (!_appName) {
+        _appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleNameKey];
+    }
+    return _appName;
+}
+
 #pragma mark - Helper
 
 - (void)log:(NSString *)message
