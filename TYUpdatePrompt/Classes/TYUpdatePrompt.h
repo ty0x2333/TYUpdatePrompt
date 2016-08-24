@@ -24,8 +24,12 @@
 
 @property (nonatomic, copy) NSString *appName;
 
+- (void)launchAppStore;
+
+#pragma mark - Check Version
+
 - (void)checkVersion;
 
-- (void)launchAppStore;
+- (void)checkVersionDaily;
 
 @end

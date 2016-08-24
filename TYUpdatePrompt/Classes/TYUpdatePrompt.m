@@ -43,34 +43,6 @@
     return self;
 }
 
-- (void)checkVersion
-{
-    NSURL *storeURL = [NSURL tyup_itunesURLWithCountry:_countryCode];
-    NSURLRequest *request = [NSMutableURLRequest requestWithURL:storeURL];
-    
-    [self log:@"storeURL: %@", storeURL];
-    
-    NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionDataTask *task = [session dataTaskWithRequest:request
-                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                if (error) {
-                                                    [self log:@"error: %@", error.localizedDescription];
-                                                    return;
-                                                }
-                                                
-                                                if (!data) {
-                                                    return;
-                                                }
-                                                
-                                                NSDictionary<NSString *, id> *appData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-                                                
-                                                [self log:@"Results: %@", appData];
-                                                
-                                                [self parseResults:appData];
-                                            }];
-    [task resume];
-}
-
 - (void)parseResults:(NSDictionary<NSString *, id> *)appData
 {
     NSParameterAssert(appData);
@@ -125,6 +97,61 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [[UIApplication sharedApplication] openURL:iTunesURL];
     });
+}
+
+#pragma mark - Check Version
+
+- (void)checkVersion
+{
+    NSURL *storeURL = [NSURL tyup_itunesURLWithCountry:_countryCode];
+    NSURLRequest *request = [NSMutableURLRequest requestWithURL:storeURL];
+    
+    [self log:@"storeURL: %@", storeURL];
+    
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    [self log:@"error: %@", error.localizedDescription];
+                                                    return;
+                                                }
+                                                
+                                                if (!data) {
+                                                    return;
+                                                }
+                                                
+                                                NSDictionary<NSString *, id> *appData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+                                                
+                                                [self log:@"Results: %@", appData];
+                                                
+                                                [self parseResults:appData];
+                                            }];
+    [task resume];
+}
+
+- (void)checkVersionDaily
+{
+    [self checkVersionWithCycle:1];
+}
+
+
+- (void)checkVersionWithCycle:(NSUInteger)day
+{
+    if (!_lastVersionCheckPerformedDate) {
+        
+        _lastVersionCheckPerformedDate = [NSDate date];
+        [self checkVersion];
+        
+        return;
+    }
+    
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay fromDate:_lastVersionCheckPerformedDate toDate:[NSDate date] options:0];
+    
+    NSInteger *interval = [components day];
+    
+    if (interval > day) {
+        [self checkVersion];
+    }
 }
 
 #pragma mark - Setter / Getter
