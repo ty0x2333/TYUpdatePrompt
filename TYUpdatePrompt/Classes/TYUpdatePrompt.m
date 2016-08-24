@@ -55,16 +55,10 @@
                                             completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                                 if (error) {
                                                     [self log:[NSString stringWithFormat:@"error: %@", error.localizedDescription]];
-                                                    if (_checkVersionCallback) {
-                                                        _checkVersionCallback(NO);
-                                                    }
                                                     return;
                                                 }
                                                 
                                                 if (!data) {
-                                                    if (_checkVersionCallback) {
-                                                        _checkVersionCallback(NO);
-                                                    }
                                                     return;
                                                 }
                                                 
@@ -94,18 +88,12 @@
         NSArray *versionsInAppStore = [[appData valueForKey:@"results"] valueForKey:@"version"];
         
         if (versionsInAppStore.count < 1) {
-            if (_checkVersionCallback) {
-                _checkVersionCallback(NO);
-            }
             return;
         }
         
         _appStoreVersion = [versionsInAppStore firstObject];
         if (![self isAppStoreVersionNewer]) {
             [self log:@"Currently installed version is newer."];
-            if (_checkVersionCallback) {
-                _checkVersionCallback(NO);
-            }
             return;
         }
         
@@ -117,7 +105,7 @@
         
         [self log:@"need update"];
         if (_checkVersionCallback) {
-            _checkVersionCallback(YES);
+            _checkVersionCallback(self.appName, _appStoreVersion);
         }
     });
 }

@@ -10,7 +10,7 @@
 #import <TYUpdatePrompt.h>
 #import <Masonry.h>
 
-@interface TYViewController ()
+@interface TYViewController()<UIAlertViewDelegate>
 
 @end
 
@@ -49,6 +49,14 @@
         make.right.equalTo(checkVersionButton.mas_centerX).offset(-10.f);
         make.centerY.equalTo(debugSwitch);
     }];
+    
+    __weak typeof(self) weakSelf = self;
+    [TYUpdatePrompt sharedInstance].checkVersionCallback = ^(NSString *appName, NSString *appStoreVersion) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Update Available" message:[NSString stringWithFormat:@"A new version of %@ is available. Please update to version %@ now.", appName, appStoreVersion] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Update", @"Next time", @"Skip this version", nil];
+        alertView.delegate = strongSelf;
+        [alertView show];
+    };
 }
 
 - (void)onCheckVersionButtonClicked:(UIButton *)sender
@@ -61,6 +69,12 @@
 {
     NSLog(@"Debug %@", sender.isOn ? @"On" : @"Off");
     [TYUpdatePrompt sharedInstance].debugEnabled = sender.isOn;
+}
+
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
 }
 
 @end

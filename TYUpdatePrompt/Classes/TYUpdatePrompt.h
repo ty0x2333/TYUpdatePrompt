@@ -19,7 +19,7 @@
 
 @property (nonatomic, assign, getter = isDebugEnabled) BOOL debugEnabled;
 
-@property (nonatomic, copy, nullable) void (^checkVersionCallback)(BOOL isNeedUpdate);
+@property (nonatomic, copy, nullable) void (^checkVersionCallback)(NSString *appName, NSString *appStoreVersion);
 
 @property (nonatomic, copy) NSString *appName;
 
