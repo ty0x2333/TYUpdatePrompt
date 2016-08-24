@@ -50,19 +50,19 @@
         make.centerY.equalTo(debugSwitch);
     }];
     
-    __weak typeof(self) weakSelf = self;
-    [TYUpdatePrompt sharedInstance].checkVersionCallback = ^(NSString *appName, TYUPAppStoreInfo *appStoreInfo) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Update Available" message:[NSString stringWithFormat:@"A new version of %@ is available. Please update to version %@ now.\n\nRelease Notes\n\n%@", appName, appStoreInfo.version, appStoreInfo.releaseNotes] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Update", @"Next time", @"Skip this version", nil];
-        alertView.delegate = strongSelf;
-        [alertView show];
-    };
 }
 
 - (void)onCheckVersionButtonClicked:(UIButton *)sender
 {
     NSLog(@"Check Version");
-    [[TYUpdatePrompt sharedInstance] checkVersion];
+    [[TYUpdatePrompt sharedInstance] checkVersionWithCompletionHandler:^(BOOL isNeedUpdate, NSString *appName, TYUPAppStoreInfo * _Nullable appStoreInfo) {
+        if (!isNeedUpdate) {
+            return;
+        }
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Update Available" message:[NSString stringWithFormat:@"A new version of %@ is available. Please update to version %@ now.\n\nRelease Notes\n\n%@", appName, appStoreInfo.version, appStoreInfo.releaseNotes] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Update", @"Next time", @"Skip this version", nil];
+        alertView.delegate = self;
+        [alertView show];
+    }];
 }
 
 - (void)onDebugSwitchValueChanged:(UISwitch *)sender

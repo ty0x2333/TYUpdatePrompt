@@ -60,7 +60,7 @@
 
 #pragma mark - Check Version
 
-- (void)checkVersion
+- (void)checkVersionWithCompletionHandler:(void (^)(BOOL isNeedUpdate, NSString *appName, TYUPAppStoreInfo *appStoreInfo))completion
 {
     NSURL *storeURL = [NSURL tyup_itunesURLWithCountry:_countryCode];
     NSURLRequest *request = [NSMutableURLRequest requestWithURL:storeURL];
@@ -68,53 +68,64 @@
     [self log:@"storeURL: %@", storeURL];
     
     void (^completionHandler)(NSData * __nullable data, NSURLResponse * __nullable response, NSError * __nullable error) = ^(NSData *data, NSURLResponse *response, NSError *error) {
-        if (error) {
-            [self log:@"error: %@", error.localizedDescription];
-            return;
-        }
+        BOOL isParseSuccess = NO;
+        NSArray *results;
+        do {
+            if (error) {
+                [self log:@"error: %@", error.localizedDescription];
+                break;
+            }
+            if (!data) {
+                break;
+            }
+            NSError *jsonError;
+            NSDictionary<NSString *, id> *appData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonError];
+            
+            if (jsonError) {
+                [self log:@"error: %@", error.localizedDescription];
+                break;
+            }
+            [self log:@"Results: %@", appData];
+            
+            results = [appData objectForKey:@"results"];
+            if (results.count < 1) {
+                break;
+            }
+            
+            isParseSuccess = YES;
+        } while (0);
         
-        if (!data) {
-            return;
-        }
-        
-        NSDictionary<NSString *, id> *appData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-        
-        [self log:@"Results: %@", appData];
-        
-        NSArray *results = [appData objectForKey:@"results"];
-        if (results.count < 1) {
+        if (!isParseSuccess) {
+            completion(NO, self.appName, nil);
             return;
         }
         
         _appStoreInfo = [[TYUPAppStoreInfo alloc] initWithDictionary:[results firstObject]];
-        
-        if (![_appStoreInfo isUpdateCompatible]) {
-            [self log:@"Device is not incompatible with installed verison of iOS"];
-            return;
-        }
-        
         dispatch_async(dispatch_get_main_queue(), ^{
+            BOOL isNeedUpdate = NO;
             
             _lastVersionCheckPerformedDate = [NSDate date];
             [[NSUserDefaults standardUserDefaults] tyup_storeLastVersionCheckPerformedDate:_lastVersionCheckPerformedDate];
+
+            do {
+                if (![_appStoreInfo isUpdateCompatible]) {
+                    [self log:@"Device is not incompatible with installed verison of iOS"];
+                    break;
+                }
+                if (![_appStoreInfo isAppStoreVersionNewer:_currentVersion]) {
+                    [self log:@"Currently installed version is newer."];
+                    break;
+                }
+                if (!_appStoreInfo.appID.length < 1) {
+                    [self log:@"error: appID is nil"];
+                }
+                isNeedUpdate = YES;
+            } while (0);
             
-            if (_appStoreInfo.version.length < 0) {
-                return;
+            if (completion) {
+                completion(isNeedUpdate, self.appName, _appStoreInfo);
             }
             
-            if (![_appStoreInfo isAppStoreVersionNewer:_currentVersion]) {
-                [self log:@"Currently installed version is newer."];
-                return;
-            }
-            
-            if (!_appStoreInfo.appID.length < 0) {
-                [self log:@"error: appID is nil"];
-            }
-            
-            [self log:@"need update"];
-            if (_checkVersionCallback) {
-                _checkVersionCallback(self.appName, _appStoreInfo);
-            }
         });
     };
     
@@ -138,7 +149,7 @@
     if (!_lastVersionCheckPerformedDate) {
         
         _lastVersionCheckPerformedDate = [NSDate date];
-        [self checkVersion];
+        [self checkVersionWithCompletionHandler:nil];
         
         return;
     }
@@ -148,7 +159,7 @@
     NSInteger *interval = [components day];
     
     if (interval > day) {
-        [self checkVersion];
+        [self checkVersionWithCompletionHandler:nil];
     }
 }
 

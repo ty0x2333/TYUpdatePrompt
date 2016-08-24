@@ -20,15 +20,13 @@
 
 @property (nonatomic, assign, getter = isDebugEnabled) BOOL debugEnabled;
 
-@property (nonatomic, copy, nullable) void (^checkVersionCallback)(NSString *appName, TYUPAppStoreInfo *appStoreInfo);
-
 @property (nonatomic, copy) NSString *appName;
 
 - (void)launchAppStore;
 
 #pragma mark - Check Version
 
-- (void)checkVersion;
+- (void)checkVersionWithCompletionHandler:(void (^)(BOOL isNeedUpdate, NSString *appName, TYUPAppStoreInfo * __nullable appStoreInfo))completion;
 
 - (void)checkVersionDaily;
 
