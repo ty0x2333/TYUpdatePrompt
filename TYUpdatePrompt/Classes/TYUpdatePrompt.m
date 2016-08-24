@@ -48,13 +48,13 @@
     NSURL *storeURL = [NSURL tyup_itunesURLWithCountry:_countryCode];
     NSURLRequest *request = [NSMutableURLRequest requestWithURL:storeURL];
     
-    [self log:[NSString stringWithFormat:@"storeURL: %@", storeURL]];
+    [self log:@"storeURL: %@", storeURL];
     
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request
                                             completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                                 if (error) {
-                                                    [self log:[NSString stringWithFormat:@"error: %@", error.localizedDescription]];
+                                                    [self log:@"error: %@", error.localizedDescription];
                                                     return;
                                                 }
                                                 
@@ -64,7 +64,7 @@
                                                 
                                                 NSDictionary<NSString *, id> *appData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
                                                 
-                                                [self log:[NSString stringWithFormat:@"Results: %@", appData]];
+                                                [self log:@"Results: %@", appData];
                                                 
                                                 [self parseResults:appData];
                                             }];
@@ -119,7 +119,7 @@
         return;
     }
     NSString *iTunesString = [NSString stringWithFormat:@"https://itunes.apple.com/app/id%@", _appStoreInfo.appID];
-    [self log:[NSString stringWithFormat:@"launch AppStore: %@", iTunesString]];
+    [self log:@"launch AppStore: %@", iTunesString];
     NSURL *iTunesURL = [NSURL URLWithString:iTunesString];
     
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -139,12 +139,16 @@
 
 #pragma mark - Helper
 
-- (void)log:(NSString *)message
+- (void)log:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);
 {
     if (!self.isDebugEnabled) {
         return;
     }
+    va_list args;
+    va_start(args, format);
+    NSString *message = [[NSString alloc] initWithFormat:format arguments:args];
     NSLog(@"<TYUpdatePrompt> %@", message);
+    va_end(args);
 }
 
 @end
