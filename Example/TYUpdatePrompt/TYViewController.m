@@ -75,6 +75,14 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    switch (buttonIndex) {
+        case 0:
+            [[TYUpdatePrompt sharedInstance] launchAppStore];
+            break;
+            
+        default:
+            break;
+    }
 }
 
 @end

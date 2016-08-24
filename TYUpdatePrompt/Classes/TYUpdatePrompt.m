@@ -110,6 +110,21 @@
     });
 }
 
+- (void)launchAppStore
+{
+    if (!_appID) {
+        [self log:@"error: appID is nil"];
+        return;
+    }
+    NSString *iTunesString = [NSString stringWithFormat:@"https://itunes.apple.com/app/id%@", _appID];
+    [self log:[NSString stringWithFormat:@"launch AppStore: %@", iTunesString]];
+    NSURL *iTunesURL = [NSURL URLWithString:iTunesString];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[UIApplication sharedApplication] openURL:iTunesURL];
+    });
+}
+
 - (BOOL)isUpdateCompatibleWithDeviceOS:(NSDictionary<NSString *, id> *)appData
 {
     NSArray<NSDictionary<NSString *, id> *> *results = appData[@"results"];

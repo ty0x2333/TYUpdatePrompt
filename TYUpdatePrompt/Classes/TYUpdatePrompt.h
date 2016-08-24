@@ -25,4 +25,6 @@
 
 - (void)checkVersion;
 
+- (void)launchAppStore;
+
 @end
