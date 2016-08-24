@@ -170,7 +170,7 @@
 
 #pragma mark - Helper
 
-- (void)log:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);
+- (void)log:(NSString *)format, ...
 {
     if (!self.isDebugEnabled) {
         return;
