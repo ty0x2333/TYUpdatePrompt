@@ -43,47 +43,6 @@
     return self;
 }
 
-- (void)parseResults:(NSDictionary<NSString *, id> *)appData
-{
-    NSParameterAssert(appData);
-    
-    NSArray *results = [appData objectForKey:@"results"];
-    if (results.count < 1) {
-        return;
-    }
-    
-    _appStoreInfo = [[TYUPAppStoreInfo alloc] initWithDictionary:[results firstObject]];
-    
-    if (![_appStoreInfo isUpdateCompatible]) {
-        [self log:@"Device is not incompatible with installed verison of iOS"];
-        return;
-    }
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        _lastVersionCheckPerformedDate = [NSDate date];
-        [[NSUserDefaults standardUserDefaults] tyup_storeLastVersionCheckPerformedDate:_lastVersionCheckPerformedDate];
-        
-        if (_appStoreInfo.version.length < 0) {
-            return;
-        }
-        
-        if (![_appStoreInfo isAppStoreVersionNewer:_currentVersion]) {
-            [self log:@"Currently installed version is newer."];
-            return;
-        }
-        
-        if (!_appStoreInfo.appID.length < 0) {
-            [self log:@"error: appID is nil"];
-        }
-        
-        [self log:@"need update"];
-        if (_checkVersionCallback) {
-            _checkVersionCallback(self.appName, _appStoreInfo);
-        }
-    });
-}
-
 - (void)launchAppStore
 {
     if (!_appStoreInfo.appID) {
@@ -108,24 +67,59 @@
     
     [self log:@"storeURL: %@", storeURL];
     
+    void (^completionHandler)(NSData * __nullable data, NSURLResponse * __nullable response, NSError * __nullable error) = ^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            [self log:@"error: %@", error.localizedDescription];
+            return;
+        }
+        
+        if (!data) {
+            return;
+        }
+        
+        NSDictionary<NSString *, id> *appData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+        
+        [self log:@"Results: %@", appData];
+        
+        NSArray *results = [appData objectForKey:@"results"];
+        if (results.count < 1) {
+            return;
+        }
+        
+        _appStoreInfo = [[TYUPAppStoreInfo alloc] initWithDictionary:[results firstObject]];
+        
+        if (![_appStoreInfo isUpdateCompatible]) {
+            [self log:@"Device is not incompatible with installed verison of iOS"];
+            return;
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            _lastVersionCheckPerformedDate = [NSDate date];
+            [[NSUserDefaults standardUserDefaults] tyup_storeLastVersionCheckPerformedDate:_lastVersionCheckPerformedDate];
+            
+            if (_appStoreInfo.version.length < 0) {
+                return;
+            }
+            
+            if (![_appStoreInfo isAppStoreVersionNewer:_currentVersion]) {
+                [self log:@"Currently installed version is newer."];
+                return;
+            }
+            
+            if (!_appStoreInfo.appID.length < 0) {
+                [self log:@"error: appID is nil"];
+            }
+            
+            [self log:@"need update"];
+            if (_checkVersionCallback) {
+                _checkVersionCallback(self.appName, _appStoreInfo);
+            }
+        });
+    };
+    
     NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionDataTask *task = [session dataTaskWithRequest:request
-                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                if (error) {
-                                                    [self log:@"error: %@", error.localizedDescription];
-                                                    return;
-                                                }
-                                                
-                                                if (!data) {
-                                                    return;
-                                                }
-                                                
-                                                NSDictionary<NSString *, id> *appData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-                                                
-                                                [self log:@"Results: %@", appData];
-                                                
-                                                [self parseResults:appData];
-                                            }];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:completionHandler];
     [task resume];
 }
 
