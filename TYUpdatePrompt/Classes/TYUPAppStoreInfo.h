@@ -15,7 +15,10 @@
 @property (nonatomic, copy) NSString *appID;
 @property (nonatomic, copy) NSString *version;
 @property (nonatomic, copy) NSString *releaseNotes;
+@property (nonatomic, copy) NSString *requiresOSVersion;
 
 - (BOOL)isAppStoreVersionNewer:(NSString *)targetVersion;
+
+- (BOOL)isUpdateCompatible;
 
 @end

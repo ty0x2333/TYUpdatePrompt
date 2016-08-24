@@ -82,7 +82,7 @@
     
     _appStoreInfo = [[TYUPAppStoreInfo alloc] initWithDictionary:[results firstObject]];
     
-    if (![self isUpdateCompatibleWithDeviceOS:appData]) {
+    if (![_appStoreInfo isUpdateCompatible]) {
         [self log:@"Device is not incompatible with installed verison of iOS"];
         return;
     }
@@ -125,21 +125,6 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [[UIApplication sharedApplication] openURL:iTunesURL];
     });
-}
-
-- (BOOL)isUpdateCompatibleWithDeviceOS:(NSDictionary<NSString *, id> *)appData
-{
-    NSArray<NSDictionary<NSString *, id> *> *results = appData[@"results"];
-    if (results.count < 1) {
-        return false;
-    }
-    
-    NSString *requiresOSVersion = [results firstObject][@"minimumOsVersion"];
-    if (!requiresOSVersion) {
-        return false;
-    }
-    NSString *systemVersion = [UIDevice currentDevice].systemVersion;
-    return [systemVersion compare:requiresOSVersion options:NSNumericSearch] == NSOrderedDescending || [systemVersion compare:requiresOSVersion options:NSNumericSearch] == NSOrderedSame;
 }
 
 #pragma mark - Setter / Getter

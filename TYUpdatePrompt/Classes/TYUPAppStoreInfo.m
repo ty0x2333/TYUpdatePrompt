@@ -18,6 +18,8 @@
         _appID = [[dic objectForKey:@"trackId"] stringValue];
         
         _releaseNotes = [dic objectForKey:@"releaseNotes"];
+        
+        _requiresOSVersion = [dic objectForKey:@"minimumOsVersion"];
     }
     return self;
 }
@@ -28,6 +30,15 @@
         return NO;
     }
     return [targetVersion compare:_version options:NSNumericSearch] == NSOrderedAscending;
+}
+
+- (BOOL)isUpdateCompatible
+{
+    if (_requiresOSVersion.length < 1) {
+        return NO;
+    }
+    NSString *systemVersion = [UIDevice currentDevice].systemVersion;
+    return [systemVersion compare:_requiresOSVersion options:NSNumericSearch] == NSOrderedDescending || [systemVersion compare:_requiresOSVersion options:NSNumericSearch] == NSOrderedSame;
 }
 
 @end
