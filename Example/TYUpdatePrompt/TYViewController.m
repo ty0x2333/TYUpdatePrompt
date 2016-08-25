@@ -55,13 +55,21 @@
 - (void)onCheckVersionButtonClicked:(UIButton *)sender
 {
     NSLog(@"Check Version");
-    [[TYUpdatePrompt sharedInstance] checkVersionWithCompletionHandler:^(BOOL isNeedUpdate, NSString *appName, TYUPAppStoreInfo * _Nullable appStoreInfo) {
-        if (!isNeedUpdate) {
-            return;
+    TYUpdatePrompt *updatePrompt = [TYUpdatePrompt sharedInstance];
+    [updatePrompt checkVersionWithCompletionHandler:^(BOOL isNeedUpdate, NSString *appName, TYUPAppStoreInfo *appStoreInfo) {
+        if (isNeedUpdate) {
+            NSString *title = @"Update Available";
+            NSString *message = [NSString stringWithFormat:@"A new version of %@ is available. Please update to version %@ now.\n\nRelease Notes\n\n%@",
+                                 appName,
+                                 appStoreInfo.version,
+                                 appStoreInfo.releaseNotes];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                                message:message
+                                                               delegate:self
+                                                      cancelButtonTitle:nil
+                                                      otherButtonTitles:@"Update", @"Next time", nil];
+            [alertView show];
         }
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Update Available" message:[NSString stringWithFormat:@"A new version of %@ is available. Please update to version %@ now.\n\nRelease Notes\n\n%@", appName, appStoreInfo.version, appStoreInfo.releaseNotes] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Update", @"Next time", nil];
-        alertView.delegate = self;
-        [alertView show];
     }];
 }
 
