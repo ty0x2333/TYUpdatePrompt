@@ -41,10 +41,7 @@
     components.host = @"itunes.apple.com";
     components.path = @"/lookup";
     
-#warning test
     NSMutableArray<NSURLQueryItem *> *items = [@[[NSURLQueryItem queryItemWithName:@"bundleId" value:[NSBundle mainBundle].bundleIdentifier]] mutableCopy];
-//    NSMutableArray<NSURLQueryItem *> *items = [@[[NSURLQueryItem queryItemWithName:@"bundleId" value:@"com.tianyiyan.TYTumblr"]] mutableCopy];
-
     
     if (countryCode) {
         NSURLQueryItem *countryQueryItem = [NSURLQueryItem queryItemWithName:@"country" value:countryCode];
