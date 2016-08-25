@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'TYUpdatePrompt'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of TYUpdatePrompt.'
+  s.summary          = 'Remind the user to update the application when a new version is available.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'luckytianyiyan' => 'luckytianyiyan@gmail.com' }
   s.source           = { :git => 'https://github.com/luckytianyiyan/TYUpdatePrompt.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/luckytianyiyan'
+  s.social_media_url = 'https://twitter.com/luckytianyiyan'
 
   s.ios.deployment_target = '7.0'
 
