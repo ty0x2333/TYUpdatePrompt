@@ -84,7 +84,7 @@
     NSURL *storeURL = [NSURL tyup_itunesURLWithCountry:_countryCode];
     NSURLRequest *request = [NSMutableURLRequest requestWithURL:storeURL];
     
-    [self log:@"storeURL: %@", storeURL];
+    [self log:@"Request: %@", storeURL];
     
     void (^completionHandler)(NSData * __nullable data, NSURLResponse * __nullable response, NSError * __nullable error) = ^(NSData *data, NSURLResponse *response, NSError *error) {
         BOOL isParseSuccess = NO;
@@ -104,7 +104,7 @@
                 [self log:@"error: %@", error.localizedDescription];
                 break;
             }
-            [self log:@"Results: %@", appData];
+            [self log:@"Response: %@", appData];
             
             results = [appData objectForKey:@"results"];
             if (results.count < 1) {
