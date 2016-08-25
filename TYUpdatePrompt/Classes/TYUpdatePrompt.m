@@ -153,22 +153,22 @@
     [task resume];
 }
 
-- (void)checkVersionDaily
+- (void)checkVersionDailyWithCompletionHandler:(void (^)(BOOL isNeedUpdate, NSString *appName, TYUPAppStoreInfo *appStoreInfo))completion
 {
-    [self checkVersionWithCycle:1];
+    [self checkVersionWithCycle:1 completionHandler:completion];
 }
 
-- (void)checkVersionWeekly
+- (void)checkVersionWeeklyWithCompletionHandler:(void (^)(BOOL isNeedUpdate, NSString *appName, TYUPAppStoreInfo *appStoreInfo))completion
 {
-    [self checkVersionWithCycle:7];
+    [self checkVersionWithCycle:7 completionHandler:completion];
 }
 
-- (void)checkVersionWithCycle:(NSUInteger)day
+- (void)checkVersionWithCycle:(NSUInteger)day completionHandler:(void (^)(BOOL isNeedUpdate, NSString *appName, TYUPAppStoreInfo *appStoreInfo))completion
 {
     if (!_lastVersionCheckPerformedDate) {
         
         _lastVersionCheckPerformedDate = [NSDate date];
-        [self checkVersionWithCompletionHandler:nil];
+        [self checkVersionWithCompletionHandler:completion];
         
         return;
     }
