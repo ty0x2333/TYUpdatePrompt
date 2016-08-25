@@ -79,7 +79,7 @@
 
 #pragma mark - Check Version
 
-- (void)checkVersionWithCompletionHandler:(void (^)(BOOL isNeedUpdate, NSString *appName, TYUPAppStoreInfo *appStoreInfo))completion
+- (void)checkVersionWithCompletionHandler:(void (^)(BOOL isNeedUpdate, NSString *appName, TYUPAppStoreInfo * __nullable appStoreInfo))completion
 {
     NSURL *storeURL = [NSURL tyup_itunesURLWithCountry:_countryCode];
     NSURLRequest *request = [NSMutableURLRequest requestWithURL:storeURL];
@@ -135,7 +135,7 @@
                     [self log:@"Currently installed version is newer."];
                     break;
                 }
-                if (!_appStoreInfo.appID.length < 1) {
+                if (_appStoreInfo.appID.length < 1) {
                     [self log:@"error: appID is nil"];
                 }
                 isNeedUpdate = YES;
@@ -153,12 +153,12 @@
     [task resume];
 }
 
-- (void)checkVersionDailyWithCompletionHandler:(void (^)(BOOL isNeedUpdate, NSString *appName, TYUPAppStoreInfo *appStoreInfo))completion
+- (void)checkVersionDailyWithCompletionHandler:(void (^)(BOOL isNeedUpdate, NSString *appName, TYUPAppStoreInfo * __nullable appStoreInfo))completion
 {
     [self checkVersionWithCycle:1 completionHandler:completion];
 }
 
-- (void)checkVersionWeeklyWithCompletionHandler:(void (^)(BOOL isNeedUpdate, NSString *appName, TYUPAppStoreInfo *appStoreInfo))completion
+- (void)checkVersionWeeklyWithCompletionHandler:(void (^)(BOOL isNeedUpdate, NSString *appName, TYUPAppStoreInfo * __nullable appStoreInfo))completion
 {
     [self checkVersionWithCycle:7 completionHandler:completion];
 }
@@ -175,7 +175,7 @@
     
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay fromDate:_lastVersionCheckPerformedDate toDate:[NSDate date] options:0];
     
-    NSInteger *interval = [components day];
+    NSInteger interval = [components day];
     
     if (interval > day) {
         [self checkVersionWithCompletionHandler:nil];

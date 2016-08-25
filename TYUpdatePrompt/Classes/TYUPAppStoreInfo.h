@@ -27,17 +27,21 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface TYUPAppStoreInfo : NSObject
 
 - (instancetype)initWithDictionary:(NSDictionary *)dic;
 
-@property (nonatomic, copy) NSString *appID;
-@property (nonatomic, copy) NSString *version;
-@property (nonatomic, copy) NSString *releaseNotes;
-@property (nonatomic, copy) NSString *requiresOSVersion;
+@property (nonatomic, copy, nullable) NSString *appID;
+@property (nonatomic, copy, nullable) NSString *version;
+@property (nonatomic, copy, nullable) NSString *releaseNotes;
+@property (nonatomic, copy, nullable) NSString *requiresOSVersion;
 
-- (BOOL)isAppStoreVersionNewer:(NSString *)targetVersion;
+- (BOOL)isAppStoreVersionNewer:(nullable NSString *)targetVersion;
 
 - (BOOL)isUpdateCompatible;
 
 @end
+
+NS_ASSUME_NONNULL_END

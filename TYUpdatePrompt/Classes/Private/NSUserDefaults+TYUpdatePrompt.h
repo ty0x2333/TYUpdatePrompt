@@ -27,6 +27,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface NSUserDefaults (TYUpdatePrompt)
 
 - (void)tyup_storeLastVersionCheckPerformedDate:(NSDate *)date;
@@ -34,3 +36,5 @@
 - (NSDate *)tyup_lastVersionCheckPerformedDate;
 
 @end
+
+NS_ASSUME_NONNULL_END
