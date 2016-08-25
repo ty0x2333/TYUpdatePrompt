@@ -45,6 +45,35 @@ describe(@"check version tests", ^{
       });
       
   });
+    
+    context(@"no found in app store", ^{
+        
+        __block TYUpdatePrompt *updatePrompt;
+        
+        beforeAll(^{
+            updatePrompt = [[TYUpdatePrompt alloc] init];
+            updatePrompt.debugEnabled = YES;
+            
+            [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
+                return [request.URL.host isEqualToString:@"itunes.apple.com"] && [request.URL.path isEqualToString:@"/lookup"];
+            } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
+                NSString* fixture = OHPathForFile(@"onfound.json", self.class);
+                return [OHHTTPStubsResponse responseWithFileAtPath:fixture
+                                                        statusCode:200 headers:@{@"Content-Type":@"application/json"}];
+            }];
+        });
+        
+        it(@"need not update", ^{
+            
+            __block BOOL result = YES;
+            [updatePrompt checkVersionWithCompletionHandler:^(BOOL isNeedUpdate, NSString * _Nonnull appName, TYUPAppStoreInfo * _Nullable appStoreInfo) {
+                result = isNeedUpdate;
+            }];
+            
+            [[expectFutureValue(theValue(result)) shouldEventually] beNo];
+        });
+        
+    });
 
 });
 
