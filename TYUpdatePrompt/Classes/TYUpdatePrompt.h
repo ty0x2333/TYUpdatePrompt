@@ -28,6 +28,8 @@
 #import <Foundation/Foundation.h>
 #import "TYUPAppStoreInfo.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface TYUpdatePrompt : NSObject
 
 + (instancetype)sharedInstance;
@@ -45,10 +47,12 @@
 
 #pragma mark - Check Version
 
-- (void)checkVersionWithCompletionHandler:(void (^)(BOOL isNeedUpdate, NSString *appName, TYUPAppStoreInfo * __nullable appStoreInfo))completion;
+- (void)checkVersionWithCompletionHandler:(nullable void (^)(BOOL isNeedUpdate, NSString *appName, TYUPAppStoreInfo * __nullable appStoreInfo))completion;
 
-- (void)checkVersionDailyWithCompletionHandler:(void (^)(BOOL isNeedUpdate, NSString *appName, TYUPAppStoreInfo *appStoreInfo))completion;
+- (void)checkVersionDailyWithCompletionHandler:(nullable void (^)(BOOL isNeedUpdate, NSString *appName, TYUPAppStoreInfo * __nullable appStoreInfo))completion;
 
-- (void)checkVersionWeeklyWithCompletionHandler:(void (^)(BOOL isNeedUpdate, NSString *appName, TYUPAppStoreInfo *appStoreInfo))completion;
+- (void)checkVersionWeeklyWithCompletionHandler:(nullable void (^)(BOOL isNeedUpdate, NSString *appName, TYUPAppStoreInfo * __nullable appStoreInfo))completion;
 
 @end
+
+NS_ASSUME_NONNULL_END
