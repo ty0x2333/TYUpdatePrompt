@@ -47,8 +47,8 @@
 
 - (void)checkVersionWithCompletionHandler:(void (^)(BOOL isNeedUpdate, NSString *appName, TYUPAppStoreInfo * __nullable appStoreInfo))completion;
 
-- (void)checkVersionDaily;
+- (void)checkVersionDailyWithCompletionHandler:(void (^)(BOOL isNeedUpdate, NSString *appName, TYUPAppStoreInfo *appStoreInfo))completion;
 
-- (void)checkVersionWeekly;
+- (void)checkVersionWeeklyWithCompletionHandler:(void (^)(BOOL isNeedUpdate, NSString *appName, TYUPAppStoreInfo *appStoreInfo))completion;
 
 @end
