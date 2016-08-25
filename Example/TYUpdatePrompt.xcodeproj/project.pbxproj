@@ -24,6 +24,7 @@
 		6003F5BC195388D20070C39A /* TYUpdatePromptTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* TYUpdatePromptTests.m */; };
 		D47A8AEA1B637EBB6FCA2CA5 /* libPods-TYUpdatePrompt_Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA492038D35ED5800F3946E9 /* libPods-TYUpdatePrompt_Example.a */; };
 		F53AE1331D6ED27B002D07C4 /* com.tianyiyan.TYTumblr.json in Resources */ = {isa = PBXBuildFile; fileRef = F53AE1321D6ED27B002D07C4 /* com.tianyiyan.TYTumblr.json */; };
+		F53AE1351D6ED608002D07C4 /* TYUPAppStoreInfoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F53AE1341D6ED608002D07C4 /* TYUPAppStoreInfoTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		E1D77454CA7A7EA5C5C75290 /* Pods-TYUpdatePrompt_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TYUpdatePrompt_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-TYUpdatePrompt_Example/Pods-TYUpdatePrompt_Example.release.xcconfig"; sourceTree = "<group>"; };
 		EA492038D35ED5800F3946E9 /* libPods-TYUpdatePrompt_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TYUpdatePrompt_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F53AE1321D6ED27B002D07C4 /* com.tianyiyan.TYTumblr.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = com.tianyiyan.TYTumblr.json; sourceTree = "<group>"; };
+		F53AE1341D6ED608002D07C4 /* TYUPAppStoreInfoTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYUPAppStoreInfoTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +160,7 @@
 		6003F5B5195388D20070C39A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				F53AE1341D6ED608002D07C4 /* TYUPAppStoreInfoTests.m */,
 				6003F5BB195388D20070C39A /* TYUpdatePromptTests.m */,
 				F53AE1311D6ED27B002D07C4 /* Response */,
 				6003F5B6195388D20070C39A /* Supporting Files */,
@@ -413,6 +416,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F5BC195388D20070C39A /* TYUpdatePromptTests.m in Sources */,
+				F53AE1351D6ED608002D07C4 /* TYUPAppStoreInfoTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
