@@ -59,7 +59,7 @@
         if (!isNeedUpdate) {
             return;
         }
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Update Available" message:[NSString stringWithFormat:@"A new version of %@ is available. Please update to version %@ now.\n\nRelease Notes\n\n%@", appName, appStoreInfo.version, appStoreInfo.releaseNotes] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Update", @"Next time", @"Skip this version", nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Update Available" message:[NSString stringWithFormat:@"A new version of %@ is available. Please update to version %@ now.\n\nRelease Notes\n\n%@", appName, appStoreInfo.version, appStoreInfo.releaseNotes] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Update", @"Next time", nil];
         alertView.delegate = self;
         [alertView show];
     }];
