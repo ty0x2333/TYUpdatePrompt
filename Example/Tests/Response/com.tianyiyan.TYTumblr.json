@@ -1,0 +1,12 @@
+
+
+
+{
+ "resultCount":1,
+ "results": [
+{"ipadScreenshotUrls":[], "appletvScreenshotUrls":[], "artworkUrl60":"https://is1-ssl.mzstatic.com/image/thumb/Purple62/v4/ad/37/4e/ad374e12-57ad-094b-793e-9cfee619e1f8/source/60x60bb.jpg", "artworkUrl512":"https://is1-ssl.mzstatic.com/image/thumb/Purple62/v4/ad/37/4e/ad374e12-57ad-094b-793e-9cfee619e1f8/source/512x512bb.jpg", "artworkUrl100":"https://is1-ssl.mzstatic.com/image/thumb/Purple62/v4/ad/37/4e/ad374e12-57ad-094b-793e-9cfee619e1f8/source/100x100bb.jpg", "artistViewUrl":"https://itunes.apple.com/us/developer/yiyan-tian/id1063716478?uo=4", 
+"screenshotUrls":["http://a4.mzstatic.com/us/r30/Purple41/v4/8b/e1/ec/8be1ec4b-3eb4-ee75-20d6-c70bd1d13500/screen696x696.jpeg", "http://a5.mzstatic.com/us/r30/Purple41/v4/90/03/9c/90039cbe-125f-d7ac-c079-42370e7a3c0f/screen696x696.jpeg", "http://a1.mzstatic.com/us/r30/Purple22/v4/43/2e/f3/432ef3e3-b056-76cb-2413-c8d2d7337d8d/screen696x696.jpeg"], "kind":"software", "features":[], 
+"supportedDevices":["iPhone4", "iPad2Wifi", "iPad23G", "iPhone4S", "iPadThirdGen", "iPadThirdGen4G", "iPhone5", "iPodTouchFifthGen", "iPadFourthGen", "iPadFourthGen4G", "iPadMini", "iPadMini4G", "iPhone5c", "iPhone5s", "iPhone6", "iPhone6Plus", "iPodTouchSixthGen"], "advisories":["Unrestricted Web Access"], "isGameCenterEnabled":false, "trackCensoredName":"Tyblr - Resource browser for Tumblr", "languageCodesISO2A":["EN", "ZH", "ZH"], "fileSizeBytes":"9424549", "contentAdvisoryRating":"17+", "trackViewUrl":"https://itunes.apple.com/us/app/tyblr-resource-browser-for/id1123432079?mt=8&uo=4", "trackContentRating":"17+", "formattedPrice":"Free", "minimumOsVersion":"7.0", "currency":"USD", "wrapperType":"software", "version":"1.3.0", "artistId":1063716478, "artistName":"Yiyan Tian", "genres":["Photo & Video", "Productivity"], "price":0.00, "description":"Tyblr是一个优雅的Tumblr第三方客户端.Tyblr致力于更好的浏览体验, 提供了图片和视频内容的筛选和保存.\n通过Tyblr可以高效的搜寻Tumblr的福利资源.", "bundleId":"com.tianyiyan.TYTumblr", "trackId":1123432079, "trackName":"Tyblr - Resource browser for Tumblr", "releaseDate":"2016-06-16T14:11:49Z", "primaryGenreName":"Photo & Video", "isVppDeviceBasedLicensingEnabled":true, "currentVersionReleaseDate":"2016-08-24T23:13:25Z", "releaseNotes":"1.3.0\n---\n1. 修复 iOS 9 以下, 登录崩溃\n2. 修复多图下载时, 保存失败的BUG\n3. 修复图片缩略图过于模糊\n4. 修改视频播放器样式\n5. 更友好的用户反馈\n6. 更酷的登录界面", "sellerName":"Yiyan Tian", "primaryGenreId":6008, "genreIds":["6008", "6007"]}]
+}
+
+
